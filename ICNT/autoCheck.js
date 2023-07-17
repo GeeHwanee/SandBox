@@ -10,14 +10,14 @@ $('#main_save').click(function (){
     window.close();
 });
 $('#reservation').click(function (){
+    $('#writeBtn').click();
+})
+$(document).on('click', '.action_check', function() {
     const $name = $('#mem_nm').val();
     $('#team_nm').val($name);
     $('#users').val('4');
     $('#title').val(title);
     $('#purpose').val(purpose);
     $('#agree_use1').prop('checked',true);
-    $('#writeBtn').click();
-})
-$(document).on('click', '.action_check', function() {
    $('.nowrap').append($('<button id="reservation">예약</button>'))
 });
