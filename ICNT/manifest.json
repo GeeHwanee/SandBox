@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "ICNT",
+  "version": "1.0",
+  "action": {
+    "default_popup": "main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.icsports.or.kr/*"],
+      "js": ["jquery-3.5.1.js", "autoCheck.js"]
+    }
+  ]
+}
