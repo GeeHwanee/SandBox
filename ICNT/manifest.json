@@ -5,6 +5,8 @@
   "action": {
     "default_popup": "main.html"
   },
+  "description": "열우물 경기장 예약 시, 입력란을 자동으로 채워주기 위해 제작됨",
+  "icons": "tennisBall.ico",
   "content_scripts": [
     {
       "matches": ["https://www.icsports.or.kr/*"],

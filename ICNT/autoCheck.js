@@ -18,5 +18,5 @@ $(document).on('click', '.action_check', function() {
     $('#title').val(title);
     $('#purpose').val(purpose);
     $('#agree_use1').prop('checked',true);
-   $('.nowrap').append($('<button id="reservation" style="width: 50px; background-color: yellow">예약</button>'))
+   $('.nowrap').append($('<button id="reservation" style="margin-left: 20px; width: 100px; height: 50px; background-color: yellow">예약</button>'))
 });
