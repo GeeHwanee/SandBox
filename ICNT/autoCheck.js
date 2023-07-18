@@ -7,7 +7,6 @@ $('#main_save').click(function (){
     title = $('#main_title').val();
     purpose = $('#main_purpose').val();
     alert("저장하였습니다.");
-    window.close();
 });
 $('#reservation').click(function (){
     $('#writeBtn').click();
@@ -19,5 +18,5 @@ $(document).on('click', '.action_check', function() {
     $('#title').val(title);
     $('#purpose').val(purpose);
     $('#agree_use1').prop('checked',true);
-   $('.nowrap').append($('<button id="reservation" style="width: 50px">예약</button>'))
+   $('.nowrap').append($('<button id="reservation" style="width: 50px; background-color: yellow">예약</button>'))
 });
