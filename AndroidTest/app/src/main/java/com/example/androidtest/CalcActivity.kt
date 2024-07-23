@@ -24,45 +24,42 @@ public class CalcActivity : ComponentActivity() {
         display = findViewById(R.id.display);
 
         mainButton.setOnClickListener {
-            // 클릭 시 Intent 생성 및 액티비티 시작
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+           finish();
         }
 
         val calcButtons = arrayOf(R.id.Button0, R.id.Button1, R.id.Button2, R.id.Button3, R.id.Button4, R.id.Button5, R.id.Button6, R.id.Button7, R.id.Button8, R.id.Button9,
-                                R.id.ButtonAdd, R.id.ButtonMin, R.id.ButtonMulti, R.id.ButtonDiv, R.id.ButtonClear, R.id.ButtonEqual)
+                                R.id.ButtonAdd, R.id.ButtonMin, R.id.ButtonMulti, R.id.ButtonDiv, R.id.ButtonClear, R.id.ButtonEqual, R.id.ButtonDot)
         calcButtons.forEach { id -> findViewById<Button>(id).setOnClickListener{ button -> onButtonClick(button as Button) } }
 
     }
 
     private fun onButtonClick(button: Button){
-        val displayText : String = display.text.toString();
-        Log.i("CalcActivity",displayText)
         val buttonText = button.text.toString()
         val buttonTag = button.tag.toString()
         when (buttonTag) {
             "number" -> addNumber(buttonText)
             "operator" -> addOperator(buttonText)
-            "calculation" -> operation()
             "clear" -> clearDisplay()
+            "calculation" -> operation()
+
         }
 
     }
     private fun addNumber(buttonText: String){
         val displayText : String = display.text.toString();
+        Log.d("isDot", displayText.contains(".").toString())
         display.text = buildString {
             append( if(isNewNumber) "" else displayText)
-            append(buttonText)
+            append(if(displayText.contains(".") && buttonText === ".") "" else buttonText)
         };
         isNewNumber = false;
     }
     private fun addOperator(buttonText: String) {
         val displayText : String = display.text.toString();
-        firstTmpNumber = displayText.toInt();
+        firstTmpNumber = displayText.toDouble();
         tmpOperator = buttonText;
         isNewNumber = true;
     }
-
     private fun clearDisplay(){
         display.text = buildString {
             append("0")
@@ -78,24 +75,24 @@ public class CalcActivity : ComponentActivity() {
         var result : Number = 0;
         if(isNewNumber){
             when(tmpOperator) {
-                "+" -> result = firstTmpNumber.toInt() + secondTmpNumber.toInt();
-                "-" -> result = firstTmpNumber.toInt() - secondTmpNumber.toInt();
-                "*" -> result = firstTmpNumber.toInt() * secondTmpNumber.toInt();
-                "/" -> result = firstTmpNumber.toInt() / secondTmpNumber.toInt();
+                "+" -> result = firstTmpNumber.toDouble().plus(secondTmpNumber.toDouble());
+                "-" -> result = firstTmpNumber.toDouble().minus(secondTmpNumber.toDouble());
+                "*" -> result = firstTmpNumber.toDouble().times(secondTmpNumber.toDouble());
+                "/" -> result = firstTmpNumber.toDouble().div(secondTmpNumber.toDouble());
             }
             Log.d("operation", ("$firstTmpNumber$tmpOperator$secondTmpNumber = $result"))
         }else{
             when(tmpOperator) {
-                "+" -> result = firstTmpNumber.toInt() + displayText.toInt();
-                "-" -> result = firstTmpNumber.toInt() - displayText.toInt();
-                "*" -> result = firstTmpNumber.toInt() * displayText.toInt();
-                "/" -> result = firstTmpNumber.toInt() / displayText.toInt();
+                "+" -> result = firstTmpNumber.toDouble().plus(displayText.toDouble());
+                "-" -> result = firstTmpNumber.toDouble().minus(displayText.toDouble());
+                "*" -> result = firstTmpNumber.toDouble().times(displayText.toDouble());
+                "/" -> result = firstTmpNumber.toDouble().div(displayText.toDouble());
             }
             Log.d("operation", ("$firstTmpNumber$tmpOperator$displayText = $result"))
-            secondTmpNumber = displayText.toInt();
+            secondTmpNumber = displayText.toDouble();
         }
         firstTmpNumber = result;
-        display.text = result.toString();
+        display.text = if(result.toDouble().mod(1.0) != 0.0) result.toString() else result.toInt().toString();
         isNewNumber = true;
     }
 }

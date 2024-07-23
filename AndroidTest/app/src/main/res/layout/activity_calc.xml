@@ -132,11 +132,11 @@
             android:tag="number"
             android:text="0" />
         <Button
-            android:id="@+id/ButtonEqual"
+            android:id="@+id/ButtonDot"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:tag="calculation"
-            android:text="=" />
+            android:tag="number"
+            android:text="." />
 
         <Button
             android:id="@+id/ButtonAdd"
@@ -145,6 +145,23 @@
             android:layout_marginLeft="20dp"
             android:tag="operator"
             android:text="+" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="402dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ButtonEqual"
+            android:layout_width="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:tag="calculation"
+            android:text="=" />
+
 
     </LinearLayout>
 
